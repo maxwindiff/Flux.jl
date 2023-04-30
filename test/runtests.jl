@@ -79,4 +79,19 @@ Random.seed!(0)
   else
     @info "Skipping AMDGPU tests, set FLUX_TEST_AMDGPU=true to run them."
   end
+
+  if get(ENV, "FLUX_TEST_METAL", "false") == "true"
+    using Metal
+    Metal.versioninfo()
+    if Metal.functional()
+      @show Metal.version()
+      @testset "Metal" begin
+        include("metal/runtests.jl")
+      end
+    else
+      @info "Metal.jl package is not functional. Skipping Metal tests."
+    end
+  else
+    @info "Skipping Metal tests, set FLUX_TEST_METAL=true to run them."
+  end
 end
