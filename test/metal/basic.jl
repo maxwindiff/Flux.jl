@@ -63,11 +63,11 @@ end
 
 @testset "Flux.gpu(x) on structured arrays" begin
     g1 = Zygote.OneElement(1, (2, 3), axes(ones(4, 5)))
-    @test Flux.gpu(g1) isa ROCMatrix{Int64}
+    @test Flux.gpu(g1) isa MtlMatrix{Int64}
     g2 = Zygote.Fill(1f0, 2)
     @test Flux.gpu(g2) isa MtlArray{Float32, 1}
     g3 = transpose(Float32[1 2; 3 4])
-    @test parent(Flux.gpu(g3)) isa ROCMatrix{Float32}
+    @test parent(Flux.gpu(g3)) isa MtlMatrix{Float32}
 end
 
 @testset "Flux.onecold gpu" begin
