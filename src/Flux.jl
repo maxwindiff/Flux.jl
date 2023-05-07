@@ -77,4 +77,7 @@ using .Losses
 
 include("cuda/cuda.jl")
 
+# assume Julia 1.8 for now
+include("../ext/MetalExt/MetalExt.jl")
+
 end # module
